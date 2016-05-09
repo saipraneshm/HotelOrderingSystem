@@ -37,6 +37,8 @@ public class Menu {
 	@Column(nullable=false)
     private String category;
 	
+	@Column(nullable=false)
+    private int quantity;
 	
 	
 	@OneToMany(mappedBy = "menu" )
@@ -96,6 +98,22 @@ public class Menu {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public List<Orders_Menu> getOrdersMenu() {
+		return ordersMenu;
+	}
+
+	public void setOrdersMenu(List<Orders_Menu> ordersMenu) {
+		this.ordersMenu = ordersMenu;
 	}
 	
 }
