@@ -6,6 +6,7 @@ app.controller("userCtrl",function($scope,$rootScope,$http,$state){
 	$scope.gotomyCart = function(){
 		$state.go("cartState");
 	}
+	  
 	
 	$state.go("userHomeState");
 });
@@ -144,6 +145,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    			 
 	    			  templateUrl : "/checkout",
 	    			  controller  : function($scope , $http, $state,$rootScope){
+	    				  $rootScope.totalPrice = 0;
+	    				  for(i=0;i<$rootScope.cart.length;i++){
+	    					  $rootScope.totalPrice = $rootScope.totalPrice+($rootScope.cart[i].UnitPrice*$rootScope.cart[i].quantity);
+	    				  }
 	    				  
 	    				  
 	    				 $scope.values = [1,2,3,4,5,6];

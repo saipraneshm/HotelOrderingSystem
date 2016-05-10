@@ -13,4 +13,29 @@ public class PageController {
         return "index";
     
 	}
+	
+	
+	@RequestMapping("/home")
+	
+	public String home(){
+		return "home";
+	}
+	
+    @RequestMapping("/userHome")
+	
+	public String userHome(){
+		return "userHome";
+	}
+    
+    @RequestMapping("/cart")
+    public String  cart(){
+    	return "cart";
+    }
+    
+    @RequestMapping("/checkout")
+    public String  checkout(){
+    	return "checkout";
+    }
+
+
 }

@@ -24,7 +24,7 @@
                  <td>{{item.Name}}</td>
                  <td>{{item.UnitPrice * item.quantity | currency}}</td>
                  <td>
-                    <select ng-model="item.quantity" ng-disabled=true ng-options="value for value in values">
+                    <select ng-model="item.quantity" ng-disabled='true' ng-options="value for value in values">
                     
                    </select>
                  </td>
@@ -37,8 +37,7 @@
                  <td>
                   <a ng-click="goBack()">Click here to modify Cart</a>
                  </td>
-                 <td>
-                 </td>
+                 
                  <td>
                    Total Price:
                  </td>
@@ -66,7 +65,7 @@
              Pick Up Date:
            </td>
            <td>
-             <input type="date">
+             <input type="date"></input>
            </td>
          </tr>
          <tr>
@@ -75,6 +74,7 @@
            </td>
            <td>
              <select ng-model="item.quantity" ng-change="updatePrice()" ng-options="value for value in values">
+             </select>
            </td>
          </tr>
        </table>
