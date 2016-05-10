@@ -23,7 +23,7 @@
                <tr ng-repeat = "item in cart">
                  <td>{{item.name}}</td>
                  <td>{{item.unitPrice * item.quantity | currency}}</td>
-                 <td>
+                 <td>{{item.quantity}}
                     <select ng-model="item.quantity" ng-disabled='true' ng-options="value for value in values">
                     
                    </select>
@@ -65,7 +65,7 @@
              Pick Up Date:
            </td>
            <td>
-             <input type="date"></input>
+             <input type="date" ng-model="pickUpDate"></input>
            </td>
          </tr>
          <tr>
@@ -73,7 +73,7 @@
              Pick Up Time:
            </td>
            <td>
-             <select ng-model="item.quantity" ng-change="updatePrice()" ng-options="value for value in values">
+             <select ng-model="pickUpTime" ng-options="time for time in times">
              </select>
            </td>
          </tr>
