@@ -24,6 +24,7 @@ public class PageController {
     @RequestMapping("/userHome")
 	
 	public String userHome(){
+    	
 		return "userHome";
 	}
     

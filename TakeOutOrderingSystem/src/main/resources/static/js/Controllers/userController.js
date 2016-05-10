@@ -1,7 +1,7 @@
 var app = angular.module("myApp",['ui.router','ui.bootstrap']);
 
 app.controller("userCtrl",function($scope,$rootScope,$http,$state){
-	console.log("am in main ctrl");
+	console.log("am hey dudu ctrl");
 	$rootScope.cart = [];
 	$scope.gotomyCart = function(){
 		$state.go("cartState");
@@ -21,25 +21,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    			 
 	    			  templateUrl : "/userHome",
 	    			  controller  : function($scope , $http, $state,$rootScope){
-	    				  
-	    				  $http.get().success(function(data){
-	    					  
+	    				  console.log("am here");
+	    				  $http.get("/getMenuItems").success(function(data){
+	    					  console.log(data);
+	    					  $scope.menu = data;
+	    					  for(i=0;i<$scope.menu.length;i++){
+	    						  $scope.menu[i].isCollapsed=true;
+	    						  console.log($scope.menu);
+	    					  }
 	    				  }).error(function(error){
 	    					  
 	    				  });
 	    				  
 	    				  
 	    				  
-	    				  $scope.quantity = 1;
-	    				  $scope.menu=[{"id":1,"Name":"Chicken Pizza","Category":"Pizza","UnitPrice":10,"isCollapsed":true,"quantity":1},
-	    				               {"id":2,"Name":"Chicken Pizza","Category":"Pizza","UnitPrice":10,"isCollapsed":true,"quantity":1},
-	    				               {"id":3,"Name":"Chicken Pizza","Category":"Pizza","UnitPrice":10,"isCollapsed":true,"quantity":1}]
+	    				 
+	    				  
 	    				  
 	    				 
 	    					 for(i=0;i<$scope.menu.length;i++){
 	    						 
 	    					  for(j=0;j<$rootScope.cart.length;j++){
-	    						  if($scope.menu[i].id == $rootScope.cart[j].id){
+	    						  if($scope.menu[i].menu_id == $rootScope.cart[j].menu_id){
 	    							  console.log("am in two loops");
 	    							  $scope.menu[i].add = true;
 	    	    					  $scope.menu[i].remove = true;
@@ -61,9 +64,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    					  console.log(index);
 	    					  $scope.menu[index].add = false;
 	    					  $scope.menu[index].remove = false;
-	    					  var id = $scope.menu[index].id;
+	    					  var id = $scope.menu[index].menu_id;
 	    					  for(i=0;i<$rootScope.cart.length;i++){
-	    						  if($rootScope.cart[i].id==id){
+	    						  if($rootScope.cart[i].menu_id==id){
 	    							  var index = $rootScope.cart.indexOf($rootScope.cart[i]);
 	    							  $rootScope.cart.splice(index,1);
 	    						  }
@@ -96,7 +99,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    				  $scope.values=[1,2,3,4,5,6,7,8,9,10];
 	    				  $rootScope.totalPrice = 0;
 	    				  for(i=0;i<$rootScope.cart.length;i++){
-	    					  $rootScope.totalPrice = $rootScope.totalPrice+($rootScope.cart[i].UnitPrice*$rootScope.cart[i].quantity);
+	    					  $rootScope.totalPrice = $rootScope.totalPrice+($rootScope.cart[i].unit_price*$rootScope.cart[i].quantity);
 	    				  }
 	    				 $scope.remove = function(item,index){
 	    					 $rootScope.cart.splice(index,1);
@@ -106,7 +109,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    					 console.log("am after zero");
 	    					 console.log($rootScope.totalPrice);
 	    					 for(i=0;i<$rootScope.cart.length;i++){
-		    					  $rootScope.totalPrice = $rootScope.totalPrice +($rootScope.cart[i].UnitPrice*$rootScope.cart[i].quantity);
+		    					  $rootScope.totalPrice = $rootScope.totalPrice +($rootScope.cart[i].unit_price*$rootScope.cart[i].quantity);
 		    				       
 	    					 }
 	    					 console.log($rootScope.cart);
@@ -118,7 +121,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    					 
 	    					 for(i=0;i<$rootScope.cart.length;i++){
 	    						 
-		    					  $rootScope.totalPrice = $rootScope.totalPrice + (($rootScope.cart[i].UnitPrice)*($rootScope.cart[i].quantity));
+		    					  $rootScope.totalPrice = $rootScope.totalPrice + (($rootScope.cart[i].unit_price)*($rootScope.cart[i].quantity));
 		    				      
 	    					 }
 	    				 }
@@ -147,7 +150,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    			  controller  : function($scope , $http, $state,$rootScope){
 	    				  $rootScope.totalPrice = 0;
 	    				  for(i=0;i<$rootScope.cart.length;i++){
-	    					  $rootScope.totalPrice = $rootScope.totalPrice+($rootScope.cart[i].UnitPrice*$rootScope.cart[i].quantity);
+	    					  $rootScope.totalPrice = $rootScope.totalPrice+($rootScope.cart[i].unit_price*$rootScope.cart[i].quantity);
 	    				  }
 	    				  
 	    				  
