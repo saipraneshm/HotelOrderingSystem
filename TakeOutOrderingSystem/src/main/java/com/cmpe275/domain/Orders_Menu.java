@@ -1,3 +1,4 @@
+
 package com.cmpe275.domain;
 
 import javax.persistence.CascadeType;

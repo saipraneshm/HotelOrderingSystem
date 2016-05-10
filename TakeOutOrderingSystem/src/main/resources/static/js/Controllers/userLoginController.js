@@ -10,7 +10,7 @@ app.controller('userLoginCtrl', function($scope,$http, $window){
 		$http.post('/login', $scope.user).success(function(data, err){
 
 			if(data.status == 200){
-					alert("Login successfully");
+				
 					$window.location.href = "/home";
 				}else if(data.status == 201){
 					alert("Login failure, please authenticate your account");
@@ -25,9 +25,8 @@ app.controller('userLoginCtrl', function($scope,$http, $window){
 	}
 	
 	$scope.signup = function(){
-		alert("inside signup");
 		if($scope.password == $scope.password_c){
-			alert("inside signup if");	
+				
 			$scope.user.firstname = $scope.firstname;
 			$scope.user.lastname  = $scope.lastname;
 			$scope.user.email     = $scope.email;

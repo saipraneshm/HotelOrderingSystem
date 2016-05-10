@@ -1,5 +1,4 @@
 
-
 var app = angular.module("myApp",['ui.router','ui.bootstrap']);
 
 app.controller("userCtrl",function($scope,$rootScope,$http,$state,$window){
@@ -12,7 +11,7 @@ app.controller("userCtrl",function($scope,$rootScope,$http,$state,$window){
 		
 		$http.post("/logout").success(function(data,err){
 			if(data.status==200){
-				$window.location.href = '/userLogin';
+				$window.location.href = '/';
 			}
 		}).error(function(error){
 			alert("Something went wrong, please try again");
