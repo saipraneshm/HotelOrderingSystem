@@ -28,7 +28,7 @@ app.controller('userLoginCtrl', function($scope,$http, $window){
 			$http.post('/signup', $scope.user).success(function(data, err){
 				if(data.status = 200){
 					alert("navigate to pin enter page");
-					$window.location.href = 'http://google.com';
+					$window.location.href = '/authenticatePin';
 				}
 			}).error(function(data,err){
 				alert("some internal error has occured");
