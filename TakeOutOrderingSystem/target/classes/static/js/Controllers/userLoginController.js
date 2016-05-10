@@ -9,8 +9,20 @@ app.controller('userLoginCtrl', function($scope,$http, $window){
 	
 		 $http.post('/login', $scope.user).success(function(data, err){
 			if(data.status = 200){
+
 				alert("Login successfully");
 				
+
+				alert(JSON.stringify(data));
+				if(data.loginStatus == "authenticated"){
+					alert("Login successfully");
+					$window.location.href = "/home";
+				}else if(data.loginStatus == "noAuthenticated"){
+					alert("Login failure");
+				}else if(data.loginStatus = "nouser"){
+					alert("User doesn't exist");
+				}
+
 			}
 		}).error(function(data,err){
 			alert("some internal error has occured");
@@ -28,7 +40,9 @@ app.controller('userLoginCtrl', function($scope,$http, $window){
 			$http.post('/signup', $scope.user).success(function(data, err){
 				if(data.status = 200){
 					alert("navigate to pin enter page");
-					$window.location.href = 'http://google.com';
+
+
+					$window.location.href = '/authenticatePin';
 				}
 			}).error(function(data,err){
 				alert("some internal error has occured");
