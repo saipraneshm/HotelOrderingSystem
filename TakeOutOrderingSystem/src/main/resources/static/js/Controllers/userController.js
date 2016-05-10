@@ -208,15 +208,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    				  
 	    				  $scope.placeOrder=function(){
 	    					  var ordersMenu=[];
-	    					  var Id = Date.now();
-	    					  var orderId = 1;
+	    					  var orderId = 1265;
+	    					  var order = {"orderId":orderId,"ordered_time":Date.now(),"pickUpDate":$scope.pickUpDate,
+		    							 "pickUpTime":$scope.pickUpTime,"status":"new"};
 	    					  for(i=0;i<$rootScope.cart.length;i++){
-	    						  ordersMenu.push({"orderId":orderId,"menuId":$rootScope.cart[i].menuId,"quantity":$rootScope.cart[i].quantity});
+	    						  ordersMenu.push({"order":order,"menu":$rootScope.cart[i],"quantity":$rootScope.cart[i].quantity});
 	    					  }
-	    					 var order = {"orderId":orderId,"ordered_time":Date.now(),"pickUpDate":$scope.pickUpDate,
-	    							 "pickUpTime":$scope.pickUpTime,"status":"new","ordersMenu":ordersMenu};
+	    					 
+	    					 
 	    					
-	    					 $http.post("/placeOrder",order).success(function(data){
+	    					 console.log("Order details")
+	    					 console.log(order);
+	    					 $http.post("/placeOrder",ordersMenu).success(function(data){
 	    						 if(data.statusCode == 200){
 	    						 alert("Order Placed Successfully");
 	    						 }

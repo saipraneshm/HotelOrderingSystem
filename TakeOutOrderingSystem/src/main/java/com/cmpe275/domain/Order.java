@@ -22,9 +22,8 @@ import javax.persistence.Table;
 public class Order {
 
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "orderId", nullable=false)
-	private int orderId;
+	private String orderId;
 	
 	
 	@Column(nullable=true)
@@ -37,10 +36,16 @@ public class Order {
 	@OneToMany(mappedBy = "order")
 	private List<Orders_Menu> ordersMenu;
 	
-	public int getOrderId() {
+	public List<Orders_Menu> getOrdersMenu() {
+		return ordersMenu;
+	}
+	public void setOrdersMenu(List<Orders_Menu> ordersMenu) {
+		this.ordersMenu = ordersMenu;
+	}
+	public String getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(int orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 	

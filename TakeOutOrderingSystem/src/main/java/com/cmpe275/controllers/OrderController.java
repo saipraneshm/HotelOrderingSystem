@@ -1,21 +1,21 @@
 package com.cmpe275.controllers;
 
-import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.cmpe275.domain.*;
+import com.cmpe275.domain.Order;
+import com.cmpe275.domain.Orders_Menu;
+import com.cmpe275.domain.User;
 import com.cmpe275.repository.OrderRepository;
-
+import com.cmpe275.repository.OrdersMenuRepository;
 import com.cmpe275.repository.UserRepository;
+
 @RestController
 public class OrderController {
 
@@ -24,20 +24,31 @@ private OrderRepository orderRepository;
 @Autowired
 private UserRepository userRepository;
 
+@Autowired
+private OrdersMenuRepository ordersMenuRepo;
 
 @RequestMapping(value="/placeOrder", method = RequestMethod.POST)
-public String placeOrder(@RequestBody Order order){
+public String placeOrder(@RequestBody Orders_Menu[] orders, HttpServletRequest req){
 	
 	
-	System.out.println("hey an here");
-	
-	
-	//int  userId = (int) request.getSession().getAttribute("userId");
+	/*System.out.println("hey an here");
+	 System.out.println("Order details");
+	 System.out.println(order);
+	JSONObject json = new JSONObject(order);
+	System.out.println(json.toString());
+	int  userId =(int) req.getSession().getAttribute("userId");
 	User user = userRepository.findByUserId(1);
-	System.out.println(user);
+	order.setOrderId(order.getOrderId()+Integer.toString(user.getUserId()));  
 	order.setUser(user);
 	System.out.println("Here");
-	orderRepository.save(order);
+	Order orders = orderRepository.save(order);*/
+	
+	for(int i = 0 ; i < orders.length; i ++ ){
+		ordersMenuRepo.save(orders[i]);
+	}
+	
+	
+	
 	
 	
 	System.out.println("ordersMenu");

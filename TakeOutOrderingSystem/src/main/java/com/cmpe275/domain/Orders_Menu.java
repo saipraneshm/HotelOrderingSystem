@@ -1,7 +1,6 @@
 package com.cmpe275.domain;
 
-import java.util.Date;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -21,15 +19,55 @@ public class Orders_Menu {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "ordermenuid", nullable=false)
-	private int orderId;
+	private int orderMenuId;
 	
-	
-	@ManyToOne(fetch=FetchType.LAZY)
+
+	public int getOrderMenuId() {
+		return orderMenuId;
+	}
+
+
+	public void setOrderMenuId(int orderMenuId) {
+		this.orderMenuId = orderMenuId;
+	}
+
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+
+
+	public Order getOrder() {
+		return order;
+	}
+
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="MENU_ID")
 	private Menu menu;
 	
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "ORDER_ID")
 	private Order order;
 	
