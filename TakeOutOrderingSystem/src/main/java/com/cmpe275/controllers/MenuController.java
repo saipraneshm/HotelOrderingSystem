@@ -19,7 +19,7 @@ public class MenuController {
 	@Autowired
 	private MenuRepository menuRepository;
 	
-	@RequestMapping(value = "/getMenuItems", method = RequestMethod.POST)
+	@RequestMapping(value = "/getMenuItems", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Menu> getItems(){
 		

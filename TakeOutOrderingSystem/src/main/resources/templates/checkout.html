@@ -21,8 +21,8 @@
              </thead>
              <tbody>
                <tr ng-repeat = "item in cart">
-                 <td>{{item.Name}}</td>
-                 <td>{{item.UnitPrice * item.quantity | currency}}</td>
+                 <td>{{item.name}}</td>
+                 <td>{{item.unitPrice * item.quantity | currency}}</td>
                  <td>
                     <select ng-model="item.quantity" ng-disabled='true' ng-options="value for value in values">
                     

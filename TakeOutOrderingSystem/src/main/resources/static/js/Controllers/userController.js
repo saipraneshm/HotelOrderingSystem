@@ -21,9 +21,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    			 
 	    			  templateUrl : "/userHome",
 	    			  controller  : function($scope , $http, $state,$rootScope){
-	    				  console.log("am here");
+	    				  console.log("am here mannn");
 	    				  $http.get("/getMenuItems").success(function(data){
-	    					  console.log(data);
+	    					  
 	    					  $scope.menu = data;
 	    					  for(i=0;i<$scope.menu.length;i++){
 	    						  $scope.menu[i].isCollapsed=true;
@@ -36,13 +36,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    				  
 	    				  
 	    				 
-	    				  
+	    				  if($scope.menu){
 	    				  
 	    				 
 	    					 for(i=0;i<$scope.menu.length;i++){
 	    						 
 	    					  for(j=0;j<$rootScope.cart.length;j++){
-	    						  if($scope.menu[i].menu_id == $rootScope.cart[j].menu_id){
+	    						  if($scope.menu[i].menuId == $rootScope.cart[j].menuId){
 	    							  console.log("am in two loops");
 	    							  $scope.menu[i].add = true;
 	    	    					  $scope.menu[i].remove = true;
@@ -51,6 +51,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    					  }
 	    				  }
 	    				  
+	    				  }
 	    				  
 	    				  $scope.add = function(item,index){
 	    					  console.log(index);
@@ -64,9 +65,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    					  console.log(index);
 	    					  $scope.menu[index].add = false;
 	    					  $scope.menu[index].remove = false;
-	    					  var id = $scope.menu[index].menu_id;
+	    					  var id = $scope.menu[index].menuId;
 	    					  for(i=0;i<$rootScope.cart.length;i++){
-	    						  if($rootScope.cart[i].menu_id==id){
+	    						  if($rootScope.cart[i].menuId==id){
 	    							  var index = $rootScope.cart.indexOf($rootScope.cart[i]);
 	    							  $rootScope.cart.splice(index,1);
 	    						  }
@@ -99,7 +100,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    				  $scope.values=[1,2,3,4,5,6,7,8,9,10];
 	    				  $rootScope.totalPrice = 0;
 	    				  for(i=0;i<$rootScope.cart.length;i++){
-	    					  $rootScope.totalPrice = $rootScope.totalPrice+($rootScope.cart[i].unit_price*$rootScope.cart[i].quantity);
+	    					  $rootScope.totalPrice = $rootScope.totalPrice+($rootScope.cart[i].unitPrice*$rootScope.cart[i].quantity);
 	    				  }
 	    				 $scope.remove = function(item,index){
 	    					 $rootScope.cart.splice(index,1);
@@ -109,7 +110,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    					 console.log("am after zero");
 	    					 console.log($rootScope.totalPrice);
 	    					 for(i=0;i<$rootScope.cart.length;i++){
-		    					  $rootScope.totalPrice = $rootScope.totalPrice +($rootScope.cart[i].unit_price*$rootScope.cart[i].quantity);
+		    					  $rootScope.totalPrice = $rootScope.totalPrice +($rootScope.cart[i].unitPrice*$rootScope.cart[i].quantity);
 		    				       
 	    					 }
 	    					 console.log($rootScope.cart);
@@ -121,7 +122,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    					 
 	    					 for(i=0;i<$rootScope.cart.length;i++){
 	    						 
-		    					  $rootScope.totalPrice = $rootScope.totalPrice + (($rootScope.cart[i].unit_price)*($rootScope.cart[i].quantity));
+		    					  $rootScope.totalPrice = $rootScope.totalPrice + (($rootScope.cart[i].unitPrice)*($rootScope.cart[i].quantity));
 		    				      
 	    					 }
 	    				 }
@@ -150,7 +151,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    			  controller  : function($scope , $http, $state,$rootScope){
 	    				  $rootScope.totalPrice = 0;
 	    				  for(i=0;i<$rootScope.cart.length;i++){
-	    					  $rootScope.totalPrice = $rootScope.totalPrice+($rootScope.cart[i].unit_price*$rootScope.cart[i].quantity);
+	    					  $rootScope.totalPrice = $rootScope.totalPrice+($rootScope.cart[i].unitPrice*$rootScope.cart[i].quantity);
 	    				  }
 	    				  
 	    				  
