@@ -42,8 +42,8 @@ public class User {
 	@Column(nullable=true)
     private String address;
 	
-	@Column(nullable=true)
-    private String status;
+	@Column(nullable=true, columnDefinition="INT(1) default 0")
+    private int status;
 	
 	@Column(nullable=true)
     private int activationCode;
@@ -91,11 +91,11 @@ public class User {
 		this.address = address;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
