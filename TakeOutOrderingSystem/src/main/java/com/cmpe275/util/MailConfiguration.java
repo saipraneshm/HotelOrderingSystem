@@ -1,0 +1,47 @@
+package com.cmpe275.util;
+
+import java.util.Properties;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+
+@Configuration
+public class MailConfiguration {
+
+	@Bean
+	public VerifyCodeGeneratorImpl codeGenerator(){
+		VerifyCodeGeneratorImpl codeGenerator = new VerifyCodeGeneratorImpl();
+		codeGenerator.setSimpleMailMessage(simpleMailMessage());
+		codeGenerator.setMailSender(mailSender());
+		return codeGenerator;
+	}
+	
+	@Bean
+    public JavaMailSenderImpl mailSender() {
+    	
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        Properties properties = System.getProperties();
+        properties.setProperty("mail.smtp.auth","true" );
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("noreplyhotelmanagementsystem@gmail.com");
+        mailSender.setPassword("PassworD456");
+        mailSender.setJavaMailProperties(properties);
+        return mailSender;
+    }
+
+    @Bean
+    public SimpleMailMessage simpleMailMessage() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("noreplyhotelmanagementsystem@gmail.com");
+        message.setSubject("Verify your Email Address");
+        message.setText("Dear %s,\n" +
+                "\n" +
+                "          Please enter the following pin to verify your email account :\n" +
+                "\t\t       Pin : %s\n"  );
+        return message;
+    }
+}

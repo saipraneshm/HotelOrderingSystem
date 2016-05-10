@@ -14,6 +14,11 @@ public class PageController {
     
 	}
 	
+	@RequestMapping("/addMenuItem")
+	public String add_menu_item(){
+		
+		return "add_menu_item";
+	}
 	
 	@RequestMapping("/home")
 	
@@ -36,6 +41,11 @@ public class PageController {
     @RequestMapping("/checkout")
     public String  checkout(){
     	return "checkout";
+    }
+    
+    @RequestMapping("/userLogin")
+    public String userLogin(){
+    	return "userLogin";
     }
 
 
