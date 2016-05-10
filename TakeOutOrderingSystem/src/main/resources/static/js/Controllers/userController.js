@@ -6,6 +6,15 @@ app.controller("userCtrl",function($scope,$rootScope,$http,$state){
 	$scope.gotomyCart = function(){
 		$state.go("cartState");
 	}
+	$scope.logout = function(){
+		$http.get("/logout").success(function(data){
+			if(data.statusCode==200){
+				window.location.assign("/userLogin");
+			}
+		}).error(function(error){
+			alert("Something went wrong, please try again");
+		});
+	}
 	  
 	
 	$state.go("userHomeState");
@@ -29,6 +38,35 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    						  $scope.menu[i].isCollapsed=true;
 	    						  console.log($scope.menu);
 	    					  }
+	    					  
+	    					  var category = [];
+	    					  $scope.finalMenu =[];
+
+	    					  for(i=0;i<$scope.menu.length;i++){
+	    					  console.log(category.indexOf($scope.menu[i].category));
+	    					   if(category.indexOf($scope.menu[i].category)== -1)
+	    					  {
+	    					    category.push($scope.menu[i].category);
+	    					  }
+	    					  }
+
+	    					  for(i=0;i<category.length;i++){
+	    					    $scope.finalMenu.push({"category":$scope.menu[i].category,"items":[]});
+	    					  }
+
+
+	    					  for(i=0;i<$scope.menu.length;i++){
+	    					     for(j=0;j<$scope.finalMenu.length;j++){
+	    					       if($scope.menu[i].category==$scope.finalMenu[j].category){
+	    					          $scope.finalMenu[j].items.push($scope.menu[i]);
+	    					       }
+	    					     }
+	    					  }
+
+
+
+	    					  console.log($scope.menu);
+	    					  console.log($scope.finalMenu);
 	    				  }).error(function(error){
 	    					  
 	    				  });
@@ -36,7 +74,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    				  
 	    				  
 	    				 
-	    				  if($scope.menu){
+	    				 /* if($scope.menu){
 	    				  
 	    				 
 	    					 for(i=0;i<$scope.menu.length;i++){
@@ -51,21 +89,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    					  }
 	    				  }
 	    				  
-	    				  }
+	    				  }*/
 	    				  
-	    				  $scope.add = function(item,index){
+	    				  $scope.add = function(item,pindex,index){
 	    					  console.log(index);
-	    					  $scope.menu[index].add = true;
-	    					  $scope.menu[index].remove = true;
-	    					  $rootScope.cart.push($scope.menu[index]);
+	    					  $scope.finalMenu[pindex].items[index].add = true;
+	    					  $scope.finalMenu[pindex].items[index].remove = true;
+	    					  $rootScope.cart.push($scope.finalMenu[pindex].items[index]);
 	    					  console.log($rootScope.cart);
 	    				  }
 	    				  
-	    				  $scope.remove = function(item,index){
+	    				  $scope.remove = function(item,pindex,index){
 	    					  console.log(index);
-	    					  $scope.menu[index].add = false;
-	    					  $scope.menu[index].remove = false;
-	    					  var id = $scope.menu[index].menuId;
+	    					  $scope.finalMenu[pindex].items[index].add = false;
+	    					  $scope.finalMenu[pindex].items[index].remove = false;
+	    					  var id = $scope.finalMenu[pindex].items[index].menuId;
 	    					  for(i=0;i<$rootScope.cart.length;i++){
 	    						  if($rootScope.cart[i].menuId==id){
 	    							  var index = $rootScope.cart.indexOf($rootScope.cart[i]);
@@ -159,7 +197,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    				  $scope.goBack = function()
 		    				 {
 		    					 
-		    					 $state.go("userHomeState");
+		    					 $state.go("cartState");
 		    				 }
 	    				  
 	    				  
