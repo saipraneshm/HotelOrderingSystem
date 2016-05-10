@@ -14,10 +14,6 @@ import javax.persistence.Table;
 @Table(name="users")
 public class User {
 	
-	public User(String firstName, String lastName){
-		this.firstname = firstName;
-		this.lastname = lastName;
-	}
 	
 	public User(){
 		
@@ -34,7 +30,7 @@ public class User {
 	@Column(nullable=true)
     private String lastname;
 	
-	@Column(nullable=true)
+	@Column(nullable=false, unique =true)
     private String email;
 	
 	@Column(nullable=true)

@@ -37,14 +37,11 @@ public class MailConfiguration {
     public SimpleMailMessage simpleMailMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreplyhotelmanagementsystem@gmail.com");
-        message.setTo("saipranesh007@gmail.com");
         message.setSubject("Verify your Email Address");
-        message.setText("Dear User,\n" +
+        message.setText("Dear %s,\n" +
                 "\n" +
-                "                      Please enter the following pin :\n" +
-                "\t\t       Pin : %s\n" +
-                "\t\t       " +
-                "\t\t       To verify your email!. We are looking forward to see you :)");
+                "          Please enter the following pin to verify your email account :\n" +
+                "\t\t       Pin : %s\n"  );
         return message;
     }
 }

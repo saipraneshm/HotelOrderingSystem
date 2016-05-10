@@ -22,14 +22,15 @@ public class VerifyCodeGeneratorImpl implements VerifyCodeGenrerator {
 		
 	
 	@Override
-	public void codeGenerator() {
-		 SimpleMailMessage message = new SimpleMailMessage(simpleMailMessage);
-	        
+	public int codeGenerator(String username, String email) {
+		SimpleMailMessage message = new SimpleMailMessage(simpleMailMessage);
+	    message.setTo(email);
 		Random randomGenerator = new Random();
 		int num = randomGenerator.nextInt(9000) + 10000;
 		message.setText(String.format(
-                simpleMailMessage.getText(),num));
+                simpleMailMessage.getText(),username, num));
         mailSender.send(message);
+        return num;
 	}
 	
 
