@@ -37,6 +37,11 @@ public class PageController {
     public String  checkout(){
     	return "checkout";
     }
+    
+    @RequestMapping("/userLogin")
+    public String userLogin(){
+    	return "userLogin";
+    }
 
 
 }
