@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cmpe275.domain.User;
 import com.cmpe275.repository.UserRepository;
+import com.cmpe275.util.VerifyCodeGeneratorImpl;
 
 
 @RestController
@@ -21,6 +22,9 @@ public class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private VerifyCodeGeneratorImpl codeGenerator;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
@@ -47,5 +51,12 @@ public class UserController {
 		}
 		return userRepository.findByUserIdLessThan(60);
     }
+	
+	@RequestMapping(value = "/sendVerificationEmail", method = RequestMethod.POST)
+	@ResponseBody
+    public void sendVerificationCode() {
+		System.out.println("email verification sent");
+		codeGenerator.codeGenerator();
+	}
 
 }
