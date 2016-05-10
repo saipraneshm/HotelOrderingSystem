@@ -1,0 +1,89 @@
+<div class="container">
+ <div class="row">
+   <div class="col-md-7">
+  <div class="card">
+      <div class="header">
+          <h4 class="title">CheckOut</h4>
+          
+      </div>
+      <div class="content">
+         
+
+         
+
+          <table class="table">
+             <thead>
+               <tr>
+                 <th>Name</th>
+                 <th>Price</th>
+                 <th>Quantity</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr ng-repeat = "item in cart">
+                 <td>{{item.Name}}</td>
+                 <td>{{item.UnitPrice * item.quantity | currency}}</td>
+                 <td>
+                    <select ng-model="item.quantity" ng-disabled=true ng-options="value for value in values">
+                    
+                   </select>
+                 </td>
+                 
+               </tr>
+               
+                 
+               
+               <tr>
+                 <td>
+                  <a ng-click="goBack()">Click here to modify Cart</a>
+                 </td>
+                 <td>
+                 </td>
+                 <td>
+                   Total Price:
+                 </td>
+                 <td>
+                   {{totalPrice|currency}}
+                 </td>
+               </tr>
+             </tbody>
+          </table>
+          
+      </div>
+  </div>
+  </div>
+  <div class="col-md-4">
+   <div class="card">
+     <div class="header">
+       <div class="title">
+          PickUp Details
+       </div>
+     </div>
+     <div class="content">
+       <table class="table">
+         <tr>
+           <td>
+             Pick Up Date:
+           </td>
+           <td>
+             <input type="date">
+           </td>
+         </tr>
+         <tr>
+          <td>
+             Pick Up Time:
+           </td>
+           <td>
+             <select ng-model="item.quantity" ng-change="updatePrice()" ng-options="value for value in values">
+           </td>
+         </tr>
+       </table>
+        <div align="center">
+          <button class="btn btn-success btn-md" ng-click="placeOrder()">Place Order</button>
+        </div>
+
+     </div>
+    </div>
+  </div>
+  </div>
+</div>
