@@ -93,11 +93,45 @@ public class UserController {
 		User checkUser = userRepository.findByEmail(email);
 		JSONObject jsonObject = new JSONObject();
 		if( checkUser.getActivationCode() == user.getActivationCode()){
+			checkUser.setStatus("authenticated");
+			userRepository.save(checkUser);
 			jsonObject.append("status", 200);
 		}else{
 			jsonObject.append("status", 400);
 		}
 		return jsonObject.toString();
+	}
+	
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@ResponseBody
+	public String userLogin(@RequestBody User user, HttpServletRequest request){
+		JSONObject jsonObject = new JSONObject();
+		String email = user.getEmail();
+		String password = user.getPassword();
+		//System.out.println(email + " - " + password);
+		User checkUser = new User(); 
+			checkUser =	userRepository.findByEmail(email);
+		System.out.println(checkUser.getEmail() + " " + checkUser.getPassword());
+		if(checkUser.equals(null)){
+			jsonObject.append("status", 200);
+			jsonObject.append("loginStatus", "nouser");
+			return jsonObject.toString();
+		}else{
+			if(checkUser.getPassword() == password && checkUser.getStatus().equals("authenticated")){
+				jsonObject.append("status", 200);
+				jsonObject.append("loginStatus","authenticated" );
+				return jsonObject.toString();
+			}else if(checkUser.getPassword() == password && checkUser.getStatus() != "authenticated"){
+				jsonObject.append("status", 200);
+				jsonObject.append("loginStatus", "notAuthtenticated" );
+				return jsonObject.toString();
+			}else{
+				jsonObject.append("status", 400);
+				return jsonObject.toString();
+			}
+		}
+		
 	}
 	
 }
