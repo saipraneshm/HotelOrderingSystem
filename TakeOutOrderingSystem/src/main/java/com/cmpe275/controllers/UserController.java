@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cmpe275.domain.User;
 import com.cmpe275.repository.UserRepository;
+import com.cmpe275.util.GeneratePassword;
 import com.cmpe275.util.VerifyCodeGeneratorImpl;
 
 
@@ -68,6 +69,14 @@ public class UserController {
 		jsonObject = new JSONObject();
 		request.getSession().setAttribute("user_email", user.getEmail());
 		System.out.println(user.getEmail() + " " + user.getPassword());
+		
+		String password;
+		
+		GeneratePassword gp = new GeneratePassword(user.getPassword());
+		password = gp.generateHash();
+		
+		user.setPassword(password);
+		
 		int authCode = codeGenerator.codeGenerator(user.getFirstname(),user.getEmail());
 		user.setActivationCode(authCode);
 		User checkUser = userRepository.save(user);
@@ -103,10 +112,13 @@ public class UserController {
 	@ResponseBody
 	public String userLogin(@RequestBody User user, HttpServletRequest request){
 		
+		
 		JSONObject jsonObject = new JSONObject();
 		String email = user.getEmail();
-		String password = user.getPassword();
-
+		String password;
+		
+		GeneratePassword gp = new GeneratePassword(user.getPassword());
+		password = gp.generateHash();
 		
 		User checkUser = new User(); 
 			checkUser =	userRepository.findByEmail(email);

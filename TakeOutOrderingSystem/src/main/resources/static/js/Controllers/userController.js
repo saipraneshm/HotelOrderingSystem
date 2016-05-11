@@ -1,4 +1,5 @@
 
+
 var app = angular.module("myApp",['ui.router','ui.bootstrap']);
 
 app.controller("userCtrl",function($scope,$rootScope,$http,$state,$window){
@@ -211,7 +212,3 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    })
 	    
 });
-
-
-
-
