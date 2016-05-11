@@ -65,7 +65,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 
 
-	    					  console.log($scope.menu);
+	    					  //console.log($scope.menu.items);
 	    					  console.log($scope.finalMenu);
 	    				  }).error(function(error){
 	    					  
