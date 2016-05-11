@@ -15,6 +15,11 @@ public class PageController {
     
 	}
 	
+	@RequestMapping("/addMenuItem")
+	public String add_menu_item(){
+		
+		return "add_menu_item";
+	}
 	
 	@RequestMapping("/home")
 	

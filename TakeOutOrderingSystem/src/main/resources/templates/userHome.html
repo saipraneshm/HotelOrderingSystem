@@ -1,13 +1,13 @@
      <div class="container">
-       <div class="card">
+       <div class="card" ng-repeat="menu in finalMenu">
             <div class="header">
-                <h4 class="title">Menu</h4>
-                <p class="category">Add our items to cart</p>
+                <h4 class="title">{{menu.category}}</h4>
+                
              </div>
                  <div class="content">
                     <div class="panel-group">
                       <div class="row">
-                        <div class="col-md-6" ng-repeat="item in menu">
+                        <div class="col-md-6" ng-repeat="item in menu.items">
                           <div class="panel panel-default">
                             <div class="panel-heading">
                               <h4 class="panel-title">
@@ -43,13 +43,13 @@
 
                                         <tr>
                                           <td>
-                                             <button class="btn btn-success" role="button" ng-click="add(item,$index)" ng-disabled="item.add"> 
+                                             <button class="btn btn-success" role="button" ng-click="add(item,$parent.$index,$index)" ng-disabled="item.add"> 
                                                <span class="glyphicon glyphicon-plus-sign"></span>Add to Cart 
                                              </button>
                                            </td>
                                            <td>
        
-                                              <button class="btn btn-danger" role="button" ng-disabled="!item.remove" ng-click="remove(item,$index)"> 
+                                              <button class="btn btn-danger" role="button" ng-disabled="!item.remove" ng-click="remove(item,$parent.$index,$index)"> 
                                                 <span class="glyphicon glyphicon-remove"></span> Remove
                                               </button>
 
@@ -70,10 +70,11 @@
               </div>
           </div>
       </div>
-      <div class="row" align="center" ng-if="cart.length>0">
+      
+  </div>
+</div>
+ <div class="row" align="center" ng-if="cart.length>0">
         <button class="btn btn-success btn-md" ng-click="goToCart()">Cart</button>
         <button class="btn btn-success btn-md" ng-click="goToCheckout()">Checkout</button>
       </div>
-  </div>
-</div>
 </div>
