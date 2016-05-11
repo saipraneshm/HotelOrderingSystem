@@ -214,8 +214,3 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 
 
-
-
-
-
->>>>>>> e72d7087fbb76c66ad67e586b5f124679cb37145
