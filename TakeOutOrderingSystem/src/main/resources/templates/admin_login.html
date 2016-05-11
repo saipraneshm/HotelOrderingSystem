@@ -9,7 +9,7 @@
 <!-- Latest compiled JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src = "../js/Controllers/app.js"></script>
-<script src = "../js/Controllers/adminLogin.js"></script>
+<script src = "../js/Controllers/admin_login.js"></script>
 </head>
 <body ng-app="myApp" ng-controller="admin_login"> 
 <div class="container">
@@ -20,13 +20,12 @@
 
       <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" id="inputEmail" class="form-control" placeholder="User Name"/>
+        <input type="text" id="inputEmail" class="form-control" ng-model="username" placeholder="User Name"/>
 		<br />
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" />
+        <input type="password" id="inputPassword" class="form-control" ng-model="password" placeholder="Password" />
         <br />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="submit()">Sign in</button>
       </form>
 
     </div>
