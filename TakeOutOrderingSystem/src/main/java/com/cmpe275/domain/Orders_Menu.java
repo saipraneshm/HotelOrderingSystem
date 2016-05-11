@@ -35,6 +35,46 @@ public class Orders_Menu {
 	
 	
 	private int quantity;
+
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+
+
+	public Order getOrder() {
+		return order;
+	}
+
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	
 	
 }
