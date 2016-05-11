@@ -1,5 +1,7 @@
 package com.cmpe275.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -28,15 +30,20 @@ public class PageController {
 	
 	@RequestMapping("/home")
 	
-	public String home(){
-		return "home";
+	public String home(HttpServletRequest request){
+		System.out.println(request.getSession().getAttribute("user_email"));
+		if(request.getSession().getAttribute("user_email") != null){
+    		return "home";
+    	}else{
+    		return "userLogin";
+    	}
 	}
 	
     @RequestMapping("/userHome")
 	
 	public String userHome(){
-    	
-		return "userHome";
+    	return "userHome";
+		
 	}
     
     @RequestMapping("/cart")
@@ -50,8 +57,13 @@ public class PageController {
     }
     
     @RequestMapping("/userLogin")
-    public String userLogin(){
-    	return "userLogin";
+    public String userLogin(HttpServletRequest request){
+    	if(request.getSession().getAttribute("user_email") != null){
+    		return "/home";
+    	}else{
+    		return "userLogin";
+    	}
+    	
     }
     
     @RequestMapping("/authenticatePin")

@@ -84,8 +84,7 @@ public class UserController {
 	@RequestMapping(value = "/validatePin", method = RequestMethod.POST)
 	@ResponseBody
 	public String validatePin(@RequestBody User user, HttpServletRequest request){
-	
-		System.out.println("inside validate pin");
+
 		String email = (String) request.getSession().getAttribute("user_email");
 		User checkUser = userRepository.findByEmail(email);
 		JSONObject jsonObject = new JSONObject();
@@ -103,30 +102,30 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public String userLogin(@RequestBody User user, HttpServletRequest request){
+		
 		JSONObject jsonObject = new JSONObject();
 		String email = user.getEmail();
 		String password = user.getPassword();
-		int status = user.getStatus();
-		System.out.println(status);
+
+		
 		User checkUser = new User(); 
 			checkUser =	userRepository.findByEmail(email);
-		System.out.println(checkUser.getEmail() + " " + checkUser.getPassword());
-		if(checkUser.equals(null)){
-			System.out.println(checkUser.getEmail() + " inside null");
+			
+		if(checkUser == null){
 			jsonObject.append("status", 401);
 			System.out.println(jsonObject.toString() + " inside null");
 			return jsonObject.toString();
 		}else{
-			if(checkUser.getPassword() == password && user.getStatus() == 1){
+			System.out.println(checkUser.getEmail() +  " "  + email  + " " + checkUser.getPassword() + " " + password + " " + checkUser.getStatus());
+			if(checkUser.getPassword().equals(password) && checkUser.getStatus() == 1){
+				request.getSession().setAttribute("user_email", checkUser.getEmail());
 				System.out.println(checkUser.getEmail() + " inside authenticated");
 				jsonObject.append("status", 200);
-				jsonObject.append("loginStatus","authenticated" + " inside authenticated");
 				System.out.println(jsonObject.toString());
 				return jsonObject.toString();
-			}else if(checkUser.getPassword() == password && user.getStatus() == 0){
+			}else if(checkUser.getPassword().equals(password) && checkUser.getStatus() == 0){
 				System.out.println(checkUser.getEmail() + " inside not authenticated");
 				jsonObject.append("status", 201);
-				jsonObject.append("loginStatus", "notAuthtenticated" );
 				System.out.println(jsonObject.toString() + " inside not authenticated");
 				return jsonObject.toString();
 			}else{
@@ -137,6 +136,19 @@ public class UserController {
 			}
 		}
 		
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	@ResponseBody
+	public String logout(HttpServletRequest request){
+		request.getSession().removeAttribute("user_email");
+		jsonObject = new JSONObject();
+		if(request.getSession().getAttribute("user_email") == null){
+			jsonObject.append("status", 200);
+		}else{
+			jsonObject.append("status", 400);
+		}
+		return jsonObject.toString();
 	}
 	
 }

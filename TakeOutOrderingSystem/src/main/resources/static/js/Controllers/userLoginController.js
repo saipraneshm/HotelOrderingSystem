@@ -6,10 +6,10 @@ app.controller('userLoginCtrl', function($scope,$http, $window){
 		
 		$scope.user.email = $scope.email_login;
 		$scope.user.password = $scope.password_login;
-		alert("inside login");
-		 $http.post('/login', $scope.user).success(function(data, err){
-			 alert("result from callback login");
-			if(data.status = 200){
+
+		$http.post('/login', $scope.user).success(function(data, err){
+
+			if(data.status == 200){
 					alert("Login successfully");
 					$window.location.href = "/home";
 				}else if(data.status == 201){
