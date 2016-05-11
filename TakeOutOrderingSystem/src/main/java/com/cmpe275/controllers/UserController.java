@@ -109,7 +109,7 @@ public class UserController {
 		JSONObject jsonObject = new JSONObject();
 		String email = user.getEmail();
 		String password = user.getPassword();
-		//System.out.println(email + " - " + password);
+		
 		User checkUser = new User(); 
 			checkUser =	userRepository.findByEmail(email);
 		System.out.println(checkUser.getEmail() + " " + checkUser.getPassword());
