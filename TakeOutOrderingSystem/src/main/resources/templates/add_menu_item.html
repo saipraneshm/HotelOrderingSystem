@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src = "../js/Controllers/app.js"></script>
+<script src = "../js/Controllers/addMenuItemController.js"></script>
+<script type="text/javascript">
+
+function showimage(val) {
+        
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#item_image').attr('src', e.target.result).width(100).height(100);
+            };
+            
+        reader.readAsDataURL(val.files[0]);
+        document.getElementById("item_image").style.visibility="visible";
+		}
+    
+
+</script>
+</head>
+<body ng-app="myApp" ng-controller="item_add"> 
+<div class="container">
+  <div class="jumbotron">
+    <h1>Admin Menu Items Adding console</h1> 
+  </div>
+   <h4 align="center">Please enter below details </h4>
+   <form>
+ <div class="row">
+ 
+ 
+ <div class="col-lg-3">
+    
+	</div>
+	<div class="col-lg-3">
+	<input type="text" name="item_name" ng-model="item_name" class="form-control" placeholder="Menu Item Name"/>
+	</div>
+	<div class="col-lg-0.75">
+    
+	</div>
+<div class="col-lg-4">
+<select ng-model="item_category">
+  <option value="Appetizer">Appetizer</option>
+  <option value="MainCourse">MainCourse</option>
+  <option value="Desert">Desert</option>
+  <option value="Drink">Drink</option>
+</select>
+</div>
+ </div>
+ <br/>
+ <div class="row">
+ <div class="col-lg-3">
+	</div>
+	<div class="col-lg-3">
+	<input type="text" name="item_price" ng-model="item_price" class="form-control" placeholder="Menu Item Price"/>
+	</div>
+	<div class="col-lg-0.75">
+    
+	</div>
+	<div class="col-lg-3">
+	<input id="image_path" class="form-control" ng-model="item_path" name="item_time" type="text"
+				 placeholder="Path for image"/>
+	</div>
+ </div>
+ <br/>
+ <div class="row">
+ <div class="col-lg-3">
+	</div>
+	<div class="col-lg-3">
+	<input type="text" class="form-control" name="item_calories" ng-model="item_calories" placeholder="Menu Item Calories"/>
+	</div>
+	<div class="col-lg-0.75">
+    
+	</div>
+	<div class="col-lg-3">
+	<input id="price" class="form-control" name="item_time" ng-model="item_time" type="number"
+				 placeholder="Time for Preparation" min="1" max="10"/>
+	</div>
+	
+ </div>
+ <br />
+ <div class="row">
+ <div class="col-lg-5">
+	</div>
+	<div class="col-lg-2">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img id="item_image" src="#" style="visibility:hidden"/>
+	<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button type="submit" ng-click="add()" class="btn btn-md btn-success">Add
+				Item</button>
+	</div>
+ </div>
+   </form>
+   
+  </div>
+</body>
+</html>
