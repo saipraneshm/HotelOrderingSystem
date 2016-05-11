@@ -20,6 +20,11 @@ public class PageController {
 		
 		return "add_menu_item";
 	}
+	@RequestMapping("/adminLogin")
+	public String admin_login(){
+		
+		return "admin_login";
+	}
 	
 	@RequestMapping("/home")
 	
