@@ -1,5 +1,6 @@
 package com.cmpe275.controllers;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,4 +30,30 @@ public class adminController {
 		System.out.println("price "+menu.getUnitPrice());
 		menuRepository.save(menu);
 	}
+	@RequestMapping(value = "/verify", method = RequestMethod.POST)
+	@ResponseBody
+	public String verify(@RequestBody String json)
+	{
+		
+		JSONObject jsonObject = new JSONObject(json);
+		JSONObject response = new JSONObject();
+		String username=jsonObject.get("username").toString();
+		String password=jsonObject.getString("password").toString();
+		
+		System.out.println("Got this username "+username);
+		System.out.println("Got this password "+password);
+		if(username.equals("admin") && password.equals("admin"))
+		{
+			response.append("status", 200);
+		}
+		else
+		{
+			response.append("status", 404);
+		}
+			
+		return response.toString();
+		
+		
+	}
+	
 }
