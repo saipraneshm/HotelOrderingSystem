@@ -1,3 +1,4 @@
+
 var app = angular.module("myApp",['ui.router','ui.bootstrap']);
 
 app.controller("userCtrl",function($scope,$rootScope,$http,$state,$window){
@@ -66,7 +67,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 
 
-	    					  console.log($scope.menu);
+	    					  //console.log($scope.menu.items);
 	    					  console.log($scope.finalMenu);
 	    				  }).error(function(error){
 	    					  
@@ -217,3 +218,4 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 
 
+>>>>>>> e72d7087fbb76c66ad67e586b5f124679cb37145
