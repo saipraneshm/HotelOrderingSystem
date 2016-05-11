@@ -6,27 +6,28 @@ app.controller('userLoginCtrl', function($scope,$http, $window){
 		
 		$scope.user.email = $scope.email_login;
 		$scope.user.password = $scope.password_login;
-	
+		alert("inside login");
 		 $http.post('/login', $scope.user).success(function(data, err){
+			 alert("result from callback login");
 			if(data.status = 200){
-				alert(JSON.stringify(data));
-				if(data.loginStatus == "authenticated"){
 					alert("Login successfully");
 					$window.location.href = "/home";
-				}else if(data.loginStatus == "noAuthenticated"){
-					alert("Login failure");
-				}else if(data.loginStatus = "nouser"){
+				}else if(data.status == 201){
+					alert("Login failure, please authenticate your account");
+				}else if(data.status == 401 ){
 					alert("User doesn't exist");
+				}else{
+					alert("some err occured");
 				}
-			}
 		}).error(function(data,err){
 			alert("some internal error has occured");
 		});
 	}
 	
 	$scope.signup = function(){
+		alert("inside signup");
 		if($scope.password == $scope.password_c){
-			
+			alert("inside signup if");	
 			$scope.user.firstname = $scope.firstname;
 			$scope.user.lastname  = $scope.lastname;
 			$scope.user.email     = $scope.email;
@@ -34,7 +35,6 @@ app.controller('userLoginCtrl', function($scope,$http, $window){
 			
 			$http.post('/signup', $scope.user).success(function(data, err){
 				if(data.status = 200){
-					alert("navigate to pin enter page");
 					$window.location.href = '/authenticatePin';
 				}
 			}).error(function(data,err){
