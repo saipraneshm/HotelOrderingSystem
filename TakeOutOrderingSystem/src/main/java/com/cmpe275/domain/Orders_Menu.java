@@ -1,7 +1,7 @@
+
 package com.cmpe275.domain;
 
-import java.util.Date;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -21,16 +20,16 @@ public class Orders_Menu {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "ordermenuid", nullable=false)
-	private int orderId;
-	
-	
-	public int getOrderId() {
-		return orderId;
+	private int orderMenuId;
+
+
+	public int getOrderMenuId() {
+		return orderMenuId;
 	}
 
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrderMenuId(int orderMenuId) {
+		this.orderMenuId = orderMenuId;
 	}
 
 
@@ -64,17 +63,17 @@ public class Orders_Menu {
 	}
 
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="MENU_ID")
 	private Menu menu;
-	
-	
-	@ManyToOne(fetch=FetchType.LAZY)
+
+
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "ORDER_ID")
 	private Order order;
-	
-	
+
+
 	private int quantity;
-	
-	
+
+
 }

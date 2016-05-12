@@ -1,3 +1,4 @@
+
 package com.cmpe275.domain;
 
 
@@ -25,8 +26,8 @@ public class Order {
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name = "orderId", nullable=false)
 	private int orderId;
-	
-	
+
+
 	public List<Orders_Menu> getOrdersMenu() {
 		return ordersMenu;
 	}
@@ -35,21 +36,21 @@ public class Order {
 	}
 	@Column(nullable=true)
     private Date ordered_time;
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="userId")
 	private User user;
-	
+
 	@OneToMany(mappedBy = "order")
 	private List<Orders_Menu> ordersMenu;
-	
+
 	public int getOrderId() {
 		return orderId;
 	}
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
-	
+
 	public Date getOrdered_time() {
 		return ordered_time;
 	}
@@ -62,7 +63,5 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 }
-
-

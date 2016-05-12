@@ -120,7 +120,9 @@ public class UserController {
 		
 		User checkUser = new User(); 
 			checkUser =	userRepository.findByEmail(email);
-			
+
+			request.getSession().setAttribute("userId",checkUser.getUserId());
+
 		if(checkUser == null){
 			jsonObject.append("status", 401);
 			System.out.println(jsonObject.toString() + " inside null");
