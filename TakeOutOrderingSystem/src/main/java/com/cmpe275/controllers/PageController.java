@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("user_email")
 public class PageController {
+
+	@RequestMapping("/")
+    public String index() {
+		System.out.println("I reach here");
+        return "index";
+    
+	}
 	
 	@RequestMapping("/addMenuItem")
 	public String add_menu_item(){
@@ -49,10 +56,10 @@ public class PageController {
     	return "checkout";
     }
     
-    @RequestMapping("/")
+    @RequestMapping("/userLogin")
     public String userLogin(HttpServletRequest request){
     	if(request.getSession().getAttribute("user_email") != null){
-    		return "home";
+    		return "/home";
     	}else{
     		return "userLogin";
     	}
