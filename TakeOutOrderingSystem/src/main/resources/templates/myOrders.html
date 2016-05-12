@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="card">
+      <div class="header">
+          <h4 class="title">MyOrders</h4>
+          
+      </div>
+      <div class="content">
+         <div ng-if="orders.length == 0">
+           You have nor orders to show!!!
+           <td><a ng-click="goBack()">Go back to add items to cart</a></td>
+
+         </div>
+
+         <div ng-show="orders.length>0">
+
+          <table class="table">
+             <thead>
+               <tr>
+                 <th>Name</th>
+                 <th>Price</th>
+                 <th>Quantity</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr ng-repeat = "order in orders">
+                 <td>{{item.name}}</td>
+                 <td>{{item.unitPrice * item.quantity | currency}}</td>
+                 <td>
+                    <select ng-model="item.quantity" ng-change="updatePrice()" ng-options="value for value in values">
+                    
+                   </select>
+                 </td>
+                 <td>
+                   <button class="btn btn-danger" role="button" ng-click="remove(item,$index)"> 
+                      <span class="glyphicon glyphicon-remove"></span> Remove
+                   </button>
+                   
+
+                 </td>
+               </tr>
+               
+                 
+               
+               <tr>
+                 
+                 <td>
+                 </td>
+                 
+                 <td>
+                   Total Price:
+                 &nbsp;&nbsp;&nbsp;
+                 
+                   {{totalPrice|currency}}
+                 </td>
+               </tr>
+             </tbody>
+          </table>
+
+
+          </div>
+          <!-- <div class="row" align="center" ng-if="cart.length>0">
+        
+        <button class="btn btn-success btn-md" ng-click="goToCheckout()">Checkout</button>
+      </div> -->
+      </div>
+  </div>
+</div>
