@@ -209,6 +209,30 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    
 	    	}}
 	      
+	    }).state("myOrdersState", {
+	    	views: {
+	    		"myOrders" : {
+	    			 
+	    			  templateUrl : "/myOrders",
+	    			  controller  : function($scope , $http, $state,$rootScope){
+	    				  
+	    				  $scope.goBack = function()
+		    				 {
+		    					 
+		    					 $state.go("userHome");
+		    				 }
+	    				  $http.get("/myOrders").success(function(data){
+	    					  $scope.orders = data;
+	    					  
+	    				  }).error(function(error){
+	    					  alert("Something Went wrong.Please try again");
+	    				  })
+	    				  
+	    				 
+	    			  }
+	    
+	    	}}
+	      
 	    })
 	    
 });

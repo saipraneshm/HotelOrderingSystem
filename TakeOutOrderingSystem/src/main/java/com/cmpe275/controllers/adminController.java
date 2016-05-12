@@ -20,7 +20,6 @@ public class adminController {
 	@RequestMapping(value = "/item_add", method = RequestMethod.POST)
 	@ResponseBody
 	public void add_item(@RequestBody Menu menu){
-		System.out.println("heyy reached here");
 		//menuRepository.save(menu);
 		System.out.println("calories :"+menu.getCalories());
 		System.out.println("Name :"+menu.getName());

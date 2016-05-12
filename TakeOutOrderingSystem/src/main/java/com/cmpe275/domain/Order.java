@@ -27,6 +27,12 @@ public class Order {
 	private int orderId;
 	
 	
+	public List<Orders_Menu> getOrdersMenu() {
+		return ordersMenu;
+	}
+	public void setOrdersMenu(List<Orders_Menu> ordersMenu) {
+		this.ordersMenu = ordersMenu;
+	}
 	@Column(nullable=true)
     private Date ordered_time;
 	
