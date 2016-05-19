@@ -1,7 +1,9 @@
 package com.cmpe275.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,54 +12,54 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = User.class)
 @Entity
 @Table(name="users")
 public class User {
 	
-	
+	private int id;
 	public User(){
 		
 	}
-	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	@Column(name = "userId", nullable=false)
-	private int userId;
+	 	@Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "USER_ID")
+	    public int getId() {
+	        return id;
+	    }
+	 
+	    public void setId(int id) {
+	        this.id = id;
+	    }
 	
-	
-	@Column(nullable=false)
     private String firstname;
 	
-	@Column(nullable=true)
+	
     private String lastname;
 	
-	@Column(nullable=false, unique =true)
+	
     private String email;
 	
-	@Column(nullable=true)
+	
     private String password;
 	
-	@Column(nullable=true)
+	
     private int phone;
 	
-	@Column(nullable=true)
+	
     private String address;
 	
-	@Column(nullable=true, columnDefinition="INT(1) default 0")
+	
     private int status;
 	
-	@Column(nullable=true)
     private int activationCode;
-	
-	@OneToMany(mappedBy="user")
-	private List<Order> orders;
-	
-	public int getUserId() {
-		return userId;
-	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+	private List<Order> orders = new ArrayList<Order>();
+	
 
 	public String getFirstname() {
 		return firstname;
@@ -91,6 +93,7 @@ public class User {
 		this.address = address;
 	}
 
+	@Column(nullable=true, columnDefinition="INT(1) default 0")
 	public int getStatus() {
 		return status;
 	}
@@ -115,6 +118,7 @@ public class User {
 		this.phone = phone;
 	}
 
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	public List<Order> getOrders() {
 		return orders;
 	}
